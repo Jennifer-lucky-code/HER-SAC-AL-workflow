@@ -5,7 +5,7 @@ Input CSV columns (one row per configuration; energies in eV):
     name, E_slab, G_H, G_2H_C, G_2H_M, G_H2
       E_slab : E_DFT of the bare catalyst (G_* = E_*)
       G_H    : G of H* (E_DFT + ZPE - TS), lowest-energy site
-      G_2H_C : G of 2H* with the second H on an adjacent C atom (blank if not computed)
+      G_2H_C : G of 2H* with the second H on a ligand atom X, any element (blank if not computed)
       G_2H_M : G of 2H* with both H on the same metal atom, "horns" (blank if not computed)
       G_H2   : G of gas-phase H2 (same reference for every row)
 Each 2H* configuration gives its own Volmer-Tafel route (VT-C, VT-M). The VT route with the

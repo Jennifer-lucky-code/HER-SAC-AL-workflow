@@ -15,7 +15,7 @@ Read this for loop steps 4–8 (structure generation, VASP jobs, checks, free en
   | `slab/` | bare catalyst `*` (start from the `<name>/POSCAR` written by `build_poscar.py`) |
   | `H1_metal/` | `H*` on top of the metal |
   | `H1_lig<k>/` | `H*` on ligand X<k>, k = 1–4 in the X1..X4 order of the name (only inequivalent sites) |
-  | `H2_C/` | `2H*-C`: second H on an adjacent C atom |
+  | `H2_C/` | `2H*-C`: Tafel, second H on a ligand atom (any X, not only C; the `_C` name is kept for the scripts) |
   | `H2_M/` | `2H*-M` ("horns"): both H on the metal |
   | `freq_<state>/` | frequency job of an adsorbed state, e.g. `freq_H1_metal/`, `freq_H1_lig2/`, `freq_H2_C/`, `freq_H2_M/`; keep the vaspkit 501 output there as `vaspkit_501.txt` |
 
@@ -28,10 +28,15 @@ Settings used in the TMX4@G project are in `references/vasp_settings.md`. Read i
 - **Bare catalyst (`*`)**: relax, spin-polarised.
 - **First H (`H*`)**: try H on top of the metal and on each inequivalent ligand site; keep the lowest-energy
   converged structure and record its site.
-- **Second H (`2H*`)**: start from the best `H*` and always compute BOTH Tafel configurations:
-  - **2H*-C**: second H on an adjacent C atom (metal–C cooperative recombination).
-  - **2H*-M ("horns")**: both H on the same metal atom, pointing up like two horns (dihydride).
-  Each gives its own Volmer–Tafel route (VT-C, VT-M); keep both, do not keep only the lower-energy one.
+- **Second H**: the second H reacts either by the Heyrovsky or by the Tafel mechanism.
+  - **Heyrovsky** (H* + H⁺ + e⁻ → * + H₂): no extra calculation; its step follows from ΔG_H* alone
+    (ΔG_Heyrovsky = −ΔG_H*, §7).
+  - **Tafel** (2H* → * + H₂): needs a `2H*` structure. Start from the best `H*` and always compute BOTH cases:
+    - **2H*-C**: the second H adsorbs on a ligand atom X (C, N, O, P or S) next to the metal, i.e. metal–ligand
+      cooperative recombination. The label "C" is only the folder/column name, not the element.
+    - **2H*-M ("horns")**: the second H also adsorbs on the metal, both H on the same metal atom pointing up like
+      two horns (dihydride).
+    Each gives its own Volmer–Tafel route (VT-C, VT-M); keep both, do not keep only the lower-energy one.
 - After relaxation, check the H geometry (section 6): an H–H distance below ~0.9 Å means H₂ formed or a
   dihydrogen complex; label it, do not silently treat it as 2H*.
 

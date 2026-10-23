@@ -10,7 +10,7 @@ reference-energy table in references/vasp_settings.md.
 Folder convention per candidate (references/dft_her.md §1), all optional except slab/:
     slab/                      bare catalyst *            G_* = E_*
     H1_metal/, H1_lig<k>/      H* on the metal or on ligand X<k> (k = 1-4, the X1..X4 order of the name)
-    H2_C/, H2_M/               2H*: second H on an adjacent C / both H on the metal ("horns")
+    H2_C/, H2_M/               2H* (Tafel): second H on a ligand atom X / both H on the metal ("horns")
     freq_<state>/              frequency job of each adsorbed state, e.g. freq_H1_metal/, freq_H2_C/,
                                holding vaspkit_501.txt = output of `printf "501\\n298.15\\n" | vaspkit`
 
