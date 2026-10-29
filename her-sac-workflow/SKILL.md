@@ -77,7 +77,7 @@ done/running/fixed/flagged). Never edit an INCAR by hand to fix a job. Every act
 - free energies, VH/VT mechanism and limiting potential: `python scripts/her_analysis.py energies.csv --plot`
 - formation energy E_f (and AIMD only for shortlisted candidates)
 - feature extraction for the ML dataset: ε_d (VASPKIT), Bader charge transfer, d_M−X, d_M−H, plus the
-  screening target η_HER (Eq. 4) kept separate from the mechanism values.
+  screening target η_HER = min(η_VH, η_VT) (Eq. 4c), the overpotential of the more favourable pathway.
 - optional, only when the user asks: spin-state test for shortlisted open-shell candidates
   (`scripts/make_spin_tests.py`, `references/dft_her.md` §5b).
 

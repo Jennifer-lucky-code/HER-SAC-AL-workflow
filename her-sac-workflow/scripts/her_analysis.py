@@ -53,9 +53,8 @@ def analyse(E_slab, G_H, G_2H_C, G_2H_M, G_H2):
         out.update(pathway=f"VT-{best_tag}", limiting_step=best["step"], eta_limiting=best["eta"])
     else:
         out.update(pathway="VH", limiting_step=vh_step, eta_limiting=out["eta_VH"])
-    # Eq. 4 screening descriptor, using the more stable 2H* configuration
-    stable = min(done.values(), key=lambda r: r["level_2H"])
-    out["eta_screen"] = max(abs(dG_H), abs(stable["dG_2H"]))
+    # Eq. 4c screening target: eta_HER = min(eta_VH, eta_VT), the more favourable pathway
+    out["eta_screen"] = out["eta_limiting"]
     if len(done) < 2:
         out["pathway"] += " (one 2H* config missing)"
     return out

@@ -125,17 +125,18 @@ It computes, with the reference state * + 2H⁺ + 2e⁻ = 0 at U = 0 V:
 
 Mechanism: only uphill (positive) steps cost energy.
 
-- η_VH = largest positive step of {ΔG_H*, −ΔG_H*} = |ΔG_H*|
-- η_VT = largest positive step of {ΔG_H*, ΔG_2H*, ΔG_Tafel}, computed separately for VT-C and VT-M
-- Preferred pathway = the smallest of η_VH, η_VT-C, η_VT-M; report its value as the limiting potential.
+- η_VH = |ΔG_H*| / e (Eq. 4a)
+- η_VT = max(ΔG_H*, ΔG_2H*, ΔG_Tafel) / e (Eq. 4b), computed separately for VT-C and VT-M
+- η_HER = min(η_VH, η_VT) (Eq. 4c), with η_VT taken as the smaller of η_VT-C and η_VT-M: the overpotential of
+  the more favourable pathway. That pathway is the preferred one.
 - If one 2H* configuration is missing, say so next to the result.
 - If the largest VT step is the Tafel step, say so: it is chemical and cannot be lowered by applied potential.
 
-Keep the project's screening descriptor separate and clearly named: η_HER = max(|ΔG_H*|, |ΔG_2H*|) (Eq. 4 of
-the TMX4@G paper, using the more stable 2H* configuration). Never mix screening-descriptor values and mechanism values in one column or one figure axis.
+η_HER (Eq. 4 of the TMX4@G paper) is the screening target in the dataset; it is the same number as the
+limiting overpotential of the preferred pathway (`eta_limiting` = `eta_screen` in the script output).
 
 Worked check (Cr-PSSS@G, from the project data): ΔG_H* = −0.352; 2H* levels −0.397 (C) and −0.401 (M)
-→ η_VH = 0.352, η_VT-C = 0.397, η_VT-M = 0.401 → Volmer–Heyrovsky, 0.35 V. Use this to test any new script version.
+→ η_VH = 0.352, η_VT-C = 0.397, η_VT-M = 0.401 → η_HER = min(0.352, 0.397) = 0.352, Volmer–Heyrovsky, 0.35 V. Use this to test any new script version.
 
 ## 8. Stability
 
